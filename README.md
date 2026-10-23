@@ -20,6 +20,25 @@ Use the canonical `kindle-lab` KPM hub:
 
 After installation, the library contains `Bluetooth + Key Mapping`.
 
+## Library icon
+
+Since 1.0.8 the scriptlet carries its own library cover, so it no longer shows
+up as a blank thumbnail.
+
+- The cover is embedded in the scriptlet header as
+  `# Icon: data:image/png;base64,...`, the same way Button Mapper does it.
+  The Kindle reads this header and builds the thumbnail in
+  `documents/Bluetooth_Keymap_Toggle.sh.sdr/icon.png`.
+- Source image: `packages/bluetooth-keymap-toggle/icon/icon.png`
+  (520x804 grayscale, 2x the 260x402 cover size Kindle generates for
+  scriptlets, so it keeps the portrait book-cover ratio).
+- Generator: `packages/bluetooth-keymap-toggle/icon/make_icon.py`
+  (Pillow). To change the cover, edit the script, regenerate `icon.png`,
+  re-embed it in the `# Icon:` line, bump the version and rebuild the package.
+
+If the thumbnail does not refresh after an upgrade, unplug USB and restart the
+Kindle.
+
 ## Standalone feed
 
 The repository-local `manifest.json` remains available for development and
